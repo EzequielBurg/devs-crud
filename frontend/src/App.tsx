@@ -1,38 +1,22 @@
-import * as React from "react"
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
+import React from 'react';
+import { ChakraProvider, Box, Grid, theme } from '@chakra-ui/react';
+import { Provider } from 'use-http';
+import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { Header } from './components/Header';
+import { ListDevs } from './components/ListDevs';
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
-        </VStack>
-      </Grid>
-    </Box>
-  </ChakraProvider>
-)
+export const App: React.FC = () => {
+  return (
+    <ChakraProvider theme={theme}>
+      <Provider url="http://192.168.99.100:3333" options={{}}>
+        <Box textAlign="center" top="1.5" fontSize="xl">
+          <Grid p={5}>
+            <ColorModeSwitcher justifySelf="flex-end" />
+            <Header />
+            <ListDevs />
+          </Grid>
+        </Box>
+      </Provider>
+    </ChakraProvider>
+  );
+};

@@ -25,6 +25,19 @@ services:
     networks:
       - devs-back
 
+  front:
+    container_name: devs-front
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    networks:
+      - devs-back
+
 volumes:
   pgdata:
     driver: local
