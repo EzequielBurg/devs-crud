@@ -8,8 +8,12 @@ export class FindDevController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
-    const devs = await this.devsRepository.findById(id);
+    const dev = await this.devsRepository.findById(id);
 
-    return res.json(devs);
+    if (!dev) {
+      return res.status(400).json({ error: "Dev not found" });
+    }
+
+    return res.json(dev);
   }
 }

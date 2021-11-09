@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heading, Button, useDisclosure } from '@chakra-ui/react';
+import { FiPlus } from 'react-icons/fi';
 import { CreateDev } from '../CreateDev';
 
 export const Header: React.FC = () => {
@@ -11,7 +12,12 @@ export const Header: React.FC = () => {
         Devs CRUD
       </Heading>
 
-      <Button marginTop="2.5rem" width="100%" maxWidth="60" onClick={onOpen}>
+      <Button
+        leftIcon={<FiPlus />}
+        marginTop="2.5rem"
+        padding="5"
+        onClick={onOpen}
+      >
         Cadastrar novo dev
       </Button>
       <CreateDev isOpen={isOpen} onClose={onClose} />

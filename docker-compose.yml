@@ -26,10 +26,8 @@ services:
       - devs-back
 
   front:
+    build: ./frontend
     container_name: devs-front
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
     volumes:
       - ./frontend/:/app
       - /app/node_modules
