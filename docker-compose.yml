@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  database:
+    image: postgres
+    container_name: postgres-dev
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=devs-back
+    volumes:
+      - pgdata:/data/postgres
+    networks:
+      - devs-back
+  app:
+    build: ./backend
+    container_name: devs-back
+    ports:
+      - 3333:3333
+    volumes:
+      - ./backend/:/usr/app
+    networks:
+      - devs-back
+
+  front:
+    build: ./frontend
+    container_name: devs-front
+    volumes:
+      - ./frontend/:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    networks:
+      - devs-back
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  devs-back:
+    driver: bridge
